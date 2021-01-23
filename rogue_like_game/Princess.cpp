@@ -11,3 +11,27 @@ Princess::Princess(int x, int y, std::string sym, std::string hp, std::string da
     this->x = x;
     this->y = y;
 }
+res_col Princess::Collide(Zombie*) {
+    return CantMove;
+}
+res_col Princess::Collide(Princess*) {
+    return CantMove;
+}
+res_col Princess::Collide(Dragon*) {
+    return CantMove;
+}
+res_col Princess::Collide(Knight*) {
+    return CantMove;
+}
+res_col Princess::Collide(AidKit*) {
+    return Nothing;
+}
+res_col Princess::Collide(Floor*) {
+    return Nothing;
+}
+res_col Princess::Collide(Wall*) {
+    return Nothing;
+}
+res_col Princess::Collide(Projectile*) {
+    return Damage;
+}

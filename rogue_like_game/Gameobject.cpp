@@ -3,3 +3,6 @@
 //
 
 #include "Gameobject.h"
+char Gameobject::GetSym() {
+    return this->sym_char;
+}

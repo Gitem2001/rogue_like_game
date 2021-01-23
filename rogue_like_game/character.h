@@ -17,9 +17,7 @@ protected:
     int vision;
 public:
     float GetHp();
-
     float GetDamage();
-
     char GetSym();
     int  GetVision();
     std::pair<int, int> GetPos();

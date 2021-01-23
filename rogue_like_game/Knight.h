@@ -6,16 +6,27 @@
 #define ROGUE_LIKE_GAME_KNIGHT_H
 #include <string>
 #include "character.h"
-#include "Map.h"
 class Knight: public Character {
 public:
     Knight() = default;
     Knight(int x, int y, std::string sym, std::string hp, std::string damage, std::string vision);
-    void Move(char a, Map map_);
-    
+    std::pair<int,int> try_move(char a);
+    void move(int x, int y);
+	res_col Collide(Gameobject* buf);
+	res_col Collide(Zombie*) override;
+	res_col Collide(Knight*) override;
+	res_col Collide(Dragon*) override;
+	
+	res_col Collide(Princess*) override;
 
-private:
-    
+	res_col Collide(AidKit*) override;
+
+	res_col Collide(Floor*) override;
+
+	res_col Collide(Wall*) override;
+
+	res_col Collide(Projectile*) override;
+
 };
 
 

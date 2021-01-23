@@ -48,6 +48,12 @@
     <ClCompile Include="Zombie.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="AidKit.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game_loop.h">
@@ -80,12 +86,21 @@
     <ClInclude Include="Zombie.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="AidKit.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="map1.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="config.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="map.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

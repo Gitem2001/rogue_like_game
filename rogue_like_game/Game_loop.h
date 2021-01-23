@@ -4,15 +4,13 @@
 
 #ifndef ROGUE_LIKE_GAME_GAME_LOOP_H
 #define ROGUE_LIKE_GAME_GAME_LOOP_H
-#include "Knight.h"
+#include "Game_loop.h"
+#include "Map.h"
 class Game_loop {
 public:
     Game_loop() = default;
     void Start_game();
     void Cont_game(Map map_);
-private:
-    std::vector<Character*> game_characters;
-    Knight Pers;
 };
 
 
