@@ -4,14 +4,14 @@
 
 #include "Knight.h"
 
-Knight::Knight(int x, int y) {
-    this->hp=100;
-    this->sym_char='K';
-    this->damage=5;
-    this->max_hp=100;
+Knight::Knight(int x, int y, std::string sym, std::string hp, std::string damage, std::string vision) {
+    this->hp = stoi(hp);
+    this->sym_char = sym[0];
+    this->damage = stoi(damage);
+    this->max_hp = stoi(hp);
     this->x = x;
     this->y = y;
-    this->vision = 3;
+    this->vision = stoi(vision);
 }
 void Knight::Move(char a,Map map_){
     if (a=='W'){

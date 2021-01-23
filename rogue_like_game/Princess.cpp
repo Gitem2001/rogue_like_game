@@ -3,11 +3,11 @@
 //
 
 #include "Princess.h"
-Princess::Princess(int x, int y) {
-    this->hp=100;
-    this->sym_char='P';
-    this->damage=0;
-    this->max_hp=100;
+Princess::Princess(int x, int y, std::string sym, std::string hp, std::string damage) {
+    this->hp = stoi(hp);
+    this->sym_char = sym[0];
+    this->damage = stoi(damage);
+    this->max_hp = stoi(hp);
     this->x = x;
     this->y = y;
 }

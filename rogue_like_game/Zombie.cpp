@@ -4,11 +4,11 @@
 
 #include "Zombie.h"
 
-Zombie::Zombie(int x, int y) {
-    this->hp=20;
-    this->sym_char='Z';
-    this->damage=5;
-    this->max_hp=20;
+Zombie::Zombie(int x, int y, std::string sym, std::string hp, std::string damage){
+    this->hp = stoi(hp);
+    this->sym_char = sym[0];
+    this->damage = stoi(damage);
+    this->max_hp = stoi(hp);
     this->x = x;
     this->y = y;
 }

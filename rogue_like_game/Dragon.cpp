@@ -3,12 +3,11 @@
 //
 
 #include "Dragon.h"
-
-Dragon::Dragon(int x, int y) {
-    this->hp=250;
-    this->sym_char='D';
-    this->damage=20;
-    this->max_hp=350;
+Dragon::Dragon(int x, int y, std::string sym, std::string hp, std::string damage) {
+    this->hp = stoi(hp);
+    this->sym_char = sym[0];
+    this->damage = stoi(damage);
+    this->max_hp = stoi(hp);
     this->x = x;
     this->y = y;
 }
