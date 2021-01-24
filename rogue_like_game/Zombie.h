@@ -9,6 +9,7 @@
 class Zombie : public Character {
 public:
     Zombie(int x, int y, std::string sym, std::string hp, std::string damage);
+	void move(int x, int y);
 	res_col Collide(Floor*) override;
     res_col Collide(Zombie*) override;
 	res_col Collide(Knight*) override;

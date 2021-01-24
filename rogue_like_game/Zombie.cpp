@@ -12,6 +12,10 @@ Zombie::Zombie(int x, int y, std::string sym, std::string hp, std::string damage
     this->x = x;
     this->y = y;
 }
+void Zombie:: move(int x, int y) {
+    this->x = x;
+    this->y = y;
+}
 res_col Zombie::Collide(Knight*) {
     return CanAttack;
 }

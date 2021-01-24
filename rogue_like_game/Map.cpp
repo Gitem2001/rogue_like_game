@@ -46,7 +46,6 @@ Map::Map() {  // конструктор карты
             else if (buf[j] == 'K') {
                 this->Pers = std::make_shared<Knight>(i, j, constants["KNIGHT_CHAR"], constants["KNIGHT_HP"], constants["KNIGHT_DAMAGE"], constants["KNIGHT_VISION"]);
                 buf2.push_back(this->Pers);
-                
             }
             else if (buf[j] == 'P') {
                 this->Princ = std::make_shared<Princess>(i, j, constants["PRINCESS_CHAR"], constants["PRINCESS_HP"], constants["PRINCESS_DAMAGE"]);
@@ -54,10 +53,12 @@ Map::Map() {  // конструктор карты
                 
             }
             else if (buf[j] == 'Z') {
-                buf2.push_back(std::make_shared<Zombie>(i, j, constants["ZOMBIE_CHAR"], constants["ZOMBIE_HP"], constants["ZOMBIE_DAMAGE"]));
+                this->zombies.push_back(std::make_shared<Zombie>(i, j, constants["ZOMBIE_CHAR"], constants["ZOMBIE_HP"], constants["ZOMBIE_DAMAGE"]));
+                buf2.push_back(this->zombies[zombies.size()-1]);
             }
             else if (buf[j] == 'D') {
-                buf2.push_back(std::make_shared<Dragon>(i, j, constants["DRAGON_CHAR"], constants["DRAGON_HP"], constants["DRAGON_DAMAGE"]));
+                this->dragons.push_back(std::make_shared<Dragon>(i, j, constants["DRAGON_CHAR"], constants["DRAGON_HP"], constants["DRAGON_DAMAGE"]));
+                buf2.push_back(this->dragons[dragons.size()-1]);
             }
         }
         this->map_.push_back(buf2);
@@ -197,7 +198,7 @@ void Map::Win_Or_Lose() { // функция проверки победы или
     if ((abs((*this->Pers).GetPos().first - (*this->Princ).GetPos().first) == 1) && abs((*this->Pers).GetPos().second - (*this->Princ).GetPos().second) == 1) {
         this->Paint_Win();
     }
-    if ((*this->Pers).GetHp() == 0) {
+    if ((*this->Pers).GetHp() <= 0) {
         this->Paint_Lose();
     }
 }
@@ -215,6 +216,22 @@ int Map::Paint_Lose() { // вывод экрана поражения
 }
 void Map::destroy_obj(int x, int y) {
     std::map<std::string, std::string> constants = read_config();
+    switch ((*map_[x][y]).GetSym()) {
+    case 'Z':
+        for (int i = 0; i < zombies.size(); i++) {
+            if ((*zombies[i]).GetHp() == (*map_[x][y]).GetHp()) {
+                zombies[i] = nullptr;
+                break;
+            }
+        }
+    case 'D':
+        for (int i = 0; i < dragons.size(); i++) {
+            if ((*dragons[i]).GetHp() == (*map_[x][y]).GetHp()) {
+                dragons[i] = nullptr;
+                break;
+            }
+        }
+    }
     map_[x][y].~shared_ptr();
     map_[x][y] = std::make_shared<Floor>(x,y, constants["FLOOR_CHAR"]);
 }

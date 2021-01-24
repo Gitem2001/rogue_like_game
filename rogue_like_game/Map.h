@@ -9,6 +9,8 @@
 #include "character.h"
 #include "Knight.h"
 #include "Princess.h"
+#include "Zombie.h"
+#include "Dragon.h"
 #include <memory>
 class Map {
 public:
@@ -22,6 +24,8 @@ public:
     std::shared_ptr <Knight> Pers;
     std::shared_ptr <Princess> Princ;
     std::vector<std::vector<std::shared_ptr<Gameobject>>> map_;
+    std::vector<std::shared_ptr<Zombie>> zombies;
+    std::vector<std::shared_ptr<Dragon>> dragons;
 };
 
 

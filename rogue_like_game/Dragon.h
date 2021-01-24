@@ -12,6 +12,7 @@ class Dragon: public Character {
 public:
     Dragon(int x, int y, std::string sym, std::string hp, std::string damage);
     Projectile Attack(int x,int y);
+	void move(int x, int y);
 	res_col Collide(Zombie*) override;
 	res_col Collide(Dragon*) override;
 	res_col Collide(Knight*) override;
