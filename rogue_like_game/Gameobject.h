@@ -16,7 +16,8 @@ class Floor;
 class Gameobject {
 public:
     char GetSym();
-
+    void Hit(int damage);
+    float GetHp();
     virtual res_col Collide(Wall*) = 0;
 
     virtual res_col Collide(Knight*) = 0;
@@ -36,7 +37,8 @@ protected:
     int x;
     int y;
     char sym_char;
-
+    float hp;
+    float max_hp;
 };
 
 

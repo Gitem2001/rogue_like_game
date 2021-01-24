@@ -12,6 +12,7 @@ public:
     Knight(int x, int y, std::string sym, std::string hp, std::string damage, std::string vision);
     std::pair<int,int> try_move(char a);
     void move(int x, int y);
+	void Regeneration();
 	res_col Collide(Gameobject* buf);
 	res_col Collide(Zombie*) override;
 	res_col Collide(Knight*) override;

@@ -18,6 +18,7 @@ public:
     void Paint_Win();
     int Paint_Lose();
     void Win_Or_Lose();
+    void destroy_obj(int x, int y);
     std::shared_ptr <Knight> Pers;
     std::shared_ptr <Princess> Princ;
     std::vector<std::vector<std::shared_ptr<Gameobject>>> map_;

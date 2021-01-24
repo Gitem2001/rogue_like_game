@@ -6,3 +6,9 @@
 char Gameobject::GetSym() {
     return this->sym_char;
 }
+void Gameobject::Hit(int damage) {
+    this->hp -= damage;
+}
+float Gameobject::GetHp() {
+    return this->hp;
+}

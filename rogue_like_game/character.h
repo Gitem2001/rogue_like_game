@@ -11,12 +11,11 @@
 
 class Character : public Gameobject {
 protected:
-    float hp;
     float damage;
-    float max_hp;
+    
     int vision;
 public:
-    float GetHp();
+    
     float GetDamage();
     char GetSym();
     int  GetVision();

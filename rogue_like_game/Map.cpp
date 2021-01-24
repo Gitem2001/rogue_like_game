@@ -108,37 +108,93 @@ void Map::Paint() { // отрисовка карты вокруг персона
         buf2.push_back('~');
     }
     std::vector<std::vector<char>> visible_map; // создаем переменную для эскиза
-    for(int i=first_x;i<second_x;i++){  // заполнение карты которую выведем идем по строчкам
-        std::vector<char> buf; // создаем буферную переменную для строки карты
-        for (int j=first_y;j<second_y;j++){ // заполнение карты которую выведем идем по  столбцам
-            buf.push_back(this->Get_Sym(i,j)); // заполняем буферный вектор
+    bool fog = 0;
+    if (fog) {
+        for (int i = first_x; i < second_x; i++) {  // заполнение карты которую выведем идем по строчкам
+            std::vector<char> buf; // создаем буферную переменную для строки карты
+            for (int j = first_y; j < second_y; j++) { // заполнение карты которую выведем идем по  столбцам
+                buf.push_back(this->Get_Sym(i, j)); // заполняем буферный вектор
+            }
+            visible_map.push_back(buf); // заполняем эскиз
         }
-        visible_map.push_back(buf); // заполняем эскиз
-    }
-    if (flag_up == 0) {  // туман войны сверху
-        visible_map[0] = buf2;
-    }
-    if (flag_down == 0) {  // туман войны снизу
-        visible_map[visible_map.size() - 1] = buf2;
-    }
-    if (flag_left == 0) {  // туман войны слева
-        for (int i = 0; i < visible_map.size(); i++) {
-            visible_map[i][0] = '~';
+        if (flag_up == 0) {  // туман войны сверху
+            visible_map[0] = buf2;
+        }
+        if (flag_down == 0) {  // туман войны снизу
+            visible_map[visible_map.size() - 1] = buf2;
+        }
+        if (flag_left == 0) {  // туман войны слева
+            for (int i = 0; i < visible_map.size(); i++) {
+                visible_map[i][0] = '~';
+            }
+        }
+        if (flag_right == 0) {  // туман войны справа
+            for (int i = 0; i < visible_map.size(); i++) {
+                visible_map[i][buf2.size() - 1] = '~';
+            }
         }
     }
-    if (flag_right == 0) {  // туман войны справа
-        for (int i = 0; i < visible_map.size(); i++) {
-            visible_map[i][buf2.size()-1] = '~';
+    else {
+        for (int i = 0; i < this->map_.size(); i++) {
+            std::vector<char> buf;
+            for (int j = 0; j < this->map_[i].size(); j++) {
+                buf.push_back(this->Get_Sym(i, j));
+            }
+            visible_map.push_back(buf);
         }
     }
-    for (int i=0;i<visible_map.size();i++){ // вывод полученного эскиза на экран
+    start_color();
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);  // дороги
+    init_pair(2, COLOR_BLACK, COLOR_BLUE);   // стены
+    init_pair(3, COLOR_WHITE, COLOR_BLACK);  // туман
+    init_pair(4, COLOR_GREEN,COLOR_BLACK);  // зомби
+    init_pair(5, COLOR_MAGENTA, COLOR_BLACK); // принцесса
+    init_pair(6, COLOR_YELLOW, COLOR_BLACK); // рыцарь
+    init_pair(7, COLOR_RED, COLOR_BLACK); // дракон
+    init_pair(8, COLOR_RED, COLOR_WHITE);  // аптечка
+    init_pair(9, COLOR_CYAN, COLOR_BLACK); // снаряд
+    //for (int i=0;i<visible_map.size();i++){ // вывод полученного эскиза на экран
+    for (int i=0;i<this->map_.size();i++){
         for(int j=0;j<visible_map[i].size();j++){
+            int flag = 0;
+            switch (visible_map[i][j]){        
+                case '.':
+                    flag = 1;
+                    break;
+                case '#':
+                    flag = 2;
+                    break;
+                case '~':
+                    flag = 3;
+                    break;
+                case 'Z':
+                    flag = 4;
+                    break;
+                case 'P':
+                    flag = 5;
+                    break;
+                case 'K':
+                    flag = 6;
+                    break;
+                case 'D':
+                    flag = 7;
+                    break;
+                case '+':
+                    flag = 8;
+                    break;
+                case '*':
+                    flag = 9;
+                    break;
+                    
+            }
+            attron(COLOR_PAIR(flag));
             mvaddch(i, j, visible_map[i][j]);
+            attroff(COLOR_PAIR(flag));
         }
     }
 }
 void Map::Win_Or_Lose() { // функция проверки победы или проигрыша
-    if ((abs((*this->Pers).GetPos().first - (*this->Princ).GetPos().first) == 1) || abs((*this->Pers).GetPos().second - (*this->Princ).GetPos().second) == 1) {
+    if ((abs((*this->Pers).GetPos().first - (*this->Princ).GetPos().first) == 1) && abs((*this->Pers).GetPos().second - (*this->Princ).GetPos().second) == 1) {
         this->Paint_Win();
     }
     if ((*this->Pers).GetHp() == 0) {
@@ -156,4 +212,9 @@ int Map::Paint_Lose() { // вывод экрана поражения
     printw("You are lose =((");
     char buf = getch();
     exit(0);
+}
+void Map::destroy_obj(int x, int y) {
+    std::map<std::string, std::string> constants = read_config();
+    map_[x][y].~shared_ptr();
+    map_[x][y] = std::make_shared<Floor>(x,y, constants["FLOOR_CHAR"]);
 }

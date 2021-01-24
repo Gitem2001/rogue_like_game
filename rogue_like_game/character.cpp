@@ -7,9 +7,6 @@
 float Character::GetDamage() {
     return this->damage;
 }
-float Character::GetHp() {
-    return this->hp;
-}
 std::pair<int, int> Character::GetPos() {
     return {this->x,this->y};
 }

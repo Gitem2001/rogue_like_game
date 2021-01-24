@@ -33,6 +33,14 @@ void Knight::move(int x, int y) {
     this->x = x;
     this-> y = y;
 }
+void Knight::Regeneration() {
+    if (this->hp + 30 > this->max_hp) {
+        this->hp = this->max_hp;
+    }
+    else {
+        this->hp += 30;
+    }
+}
 res_col Knight::Collide(Zombie*) {
     return CanAttack;
 }
