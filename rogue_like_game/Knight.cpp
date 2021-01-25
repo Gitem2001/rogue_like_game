@@ -63,7 +63,7 @@ res_col Knight::Collide(Wall*) {
     return Nothing;
 }
 res_col Knight::Collide(Projectile*) {
-    return Damage;
+    return CanAttack;
 }
 res_col Knight::Collide(Gameobject* buf) {
     return buf->Collide(this);

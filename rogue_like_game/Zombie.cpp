@@ -38,7 +38,7 @@ res_col Zombie::Collide(Wall*) {
     return Nothing;
 }
 res_col Zombie::Collide(Projectile*) {
-    return Damage;
+    return CanAttack;
 }
 res_col Zombie::Collide(Gameobject* buf) {
     return buf->Collide(this);

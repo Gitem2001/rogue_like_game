@@ -26,6 +26,7 @@ public:
     std::vector<std::vector<std::shared_ptr<Gameobject>>> map_;
     std::vector<std::shared_ptr<Zombie>> zombies;
     std::vector<std::shared_ptr<Dragon>> dragons;
+    std::vector<std::shared_ptr<Projectile>> projectiles;
 };
 
 

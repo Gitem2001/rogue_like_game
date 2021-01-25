@@ -153,7 +153,7 @@ void Map::Paint() { // отрисовка карты вокруг персона
     init_pair(6, COLOR_YELLOW, COLOR_BLACK); // рыцарь
     init_pair(7, COLOR_RED, COLOR_BLACK); // дракон
     init_pair(8, COLOR_RED, COLOR_WHITE);  // аптечка
-    init_pair(9, COLOR_CYAN, COLOR_BLACK); // снаряд
+    init_pair(9, COLOR_RED, COLOR_YELLOW); // снаряд
     //for (int i=0;i<visible_map.size();i++){ // вывод полученного эскиза на экран
     for (int i=0;i<this->map_.size();i++){
         for(int j=0;j<visible_map[i].size();j++){

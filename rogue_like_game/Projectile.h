@@ -6,8 +6,11 @@
 #define ROGUE_LIKE_GAME_PROJECTILE_H
 
 #include "Gameobject.h"
-class Projectile: protected  Gameobject{
-    void Fly(int x_goal,int y_goal);
+#include <utility>
+class Projectile: public  Gameobject{
+public:
+	void Fly();
+	Projectile() = default;
 	res_col Collide(Zombie*) override;
 	res_col Collide(Projectile*) override;
 	res_col Collide(Knight*) override;
@@ -22,8 +25,10 @@ class Projectile: protected  Gameobject{
 
 	res_col Collide(Floor*) override;
 	res_col Collide(Gameobject* buf);
-
-public:
-    Projectile(int x,int y);
+	std::pair<int, int> direction;
+	int damage;
+	int x;
+	int y;
+    Projectile(int x,int y,std::pair<int,int> dir);
 };
 #endif //ROGUE_LIKE_GAME_PROJECTILE_H

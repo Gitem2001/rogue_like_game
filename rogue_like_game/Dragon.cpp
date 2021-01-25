@@ -37,7 +37,7 @@ res_col Dragon::Collide(Wall*) {
     return Nothing;
 }
 res_col Dragon::Collide(Projectile*) {
-    return Damage;
+    return CanAttack;
 }
 res_col Dragon::Collide(Gameobject* buf) {
     return buf->Collide(this);

@@ -31,5 +31,5 @@ res_col Wall::Collide(Knight*) {
     return CantMove;
 }
 res_col Wall::Collide(Projectile*) {
-    return Nothing;
+    return Destroy;
 }
